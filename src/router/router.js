@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from '../MainPage.vue'
-import FavouritesPage from '../FavouritesPage.vue'
+import MainPage from '@/components/MainPage.vue'
+import FavouritesPage from '@/components/FavouritesPage.vue'
 
 export default createRouter({
   routes: [

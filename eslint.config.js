@@ -12,6 +12,11 @@ export default [
     name: 'app/files-to-ignore',
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
+  {
+    rules: {
+      'vue/no-unused-vars': 'off',
+    },
+  },
 
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],

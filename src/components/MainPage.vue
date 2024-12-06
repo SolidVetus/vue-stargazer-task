@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <h1>Main Page</h1>
@@ -6,43 +7,31 @@
     </div>
 
     <ul v-else>
-      <li class="repo-list" v-for="repo in repositories" :key="repo.id">
-        <a :href="repo.html_url">{{ repo.id }}</a>
-        - ⭐ {{ repo.stargazers_count }} stars
-        <p>{{ repo.description }}</p>
-      </li>
+      <RepoCard
+        v-for="{ name, description, url, stargazers_count: stars, id } in repositories"
+        :key="id"
+        :name="name"
+        :description="description"
+        :url="url"
+        :stars="stars"
+        :id="id"
+      />
     </ul>
   </div>
 </template>
 
 <script setup>
-import axios from 'axios'
-import { onMounted, ref } from 'vue'
-// import { useStore } from '@/stores/store'
+import { onMounted } from 'vue'
+import { useStore } from '@/stores/store'
+import { storeToRefs } from 'pinia'
+import RepoCard from './RepoCard.vue'
 
-// const { repositories, fetchRepos, loading } = useStore()
+const store = useStore()
 
-const url =
-  'https://api.github.com/search/repositories?q=created:%3E2023-10-01&sort=stargazers_count&order=desc&per_page=30'
+const { repositories, loading } = storeToRefs(store)
 
-const repositories = ref([])
-const loading = ref(false)
-
-const fetchRepos = async () => {
-  loading.value = true
-  try {
-    const response = await axios.get(url)
-    repositories.value = response.data.items
-  } catch (error) {
-    console.error('Error fetching repositories:', error)
-  } finally {
-    loading.value = false
-  }
-}
-
-onMounted(() => {
-  console.log('started')
-  fetchRepos()
+onMounted(async () => {
+  await store.fetchRepos()
 })
 </script>
 

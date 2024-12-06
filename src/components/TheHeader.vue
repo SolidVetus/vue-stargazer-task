@@ -3,8 +3,8 @@
     <header>
       <h1 class="title">October 2023 Repositories</h1>
       <nav>
-        <p><router-link to="/main">Main</router-link></p>
-        <p><router-link to="/favourites">Favourites</router-link></p>
+        <router-link class="router-link" to="/main">Main</router-link>
+        <router-link class="router-link" to="/favourites">Favourites</router-link>
       </nav>
     </header>
   </div>
@@ -35,7 +35,7 @@ nav {
   align-items: center;
 }
 
-p {
+.router-link {
   font-weight: 800;
   font-size: 1.75rem;
   margin-top: 2.5rem;
@@ -47,5 +47,7 @@ p {
   margin: 0;
   display: flex;
   align-items: center;
+  color: darkblue;
+  text-decoration: none;
 }
 </style>
